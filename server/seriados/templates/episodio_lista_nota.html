@@ -7,10 +7,10 @@
     <tr><th>titulo</th><th>data</th><th>temporada</th></tr>
 {% for obj in objects %}
     <tr>
-    <td>{{obj.titulo}}</td>
-    <td>{{obj.data}}</td>
-    <td>{{obj.temporada.numero}}</td>
-</tr>
+        <td>{{obj.titulo}}</td>
+        <td>{{obj.data}}</td>
+        <td>{{obj.temporada.numero}}</td>
+    </tr>
 {% endfor %}
 </table>
 {% endblock %}
