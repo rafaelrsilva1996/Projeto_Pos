@@ -6,4 +6,4 @@ from . import models
 
 admin.site.register(models.Serie)
 admin.site.register(models.Temporada)
-admin.site.register(models.Epsidio)
+admin.site.register(models.Episodio)
