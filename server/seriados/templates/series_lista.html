@@ -4,6 +4,6 @@
     <h1>Lista de Séries</h1>
 
 {% for series in lista_series %}
-    <p>{{ series.nome }}</p>
+    <a href="{{ series.get_absolute_url }}"><p>{{ series.nome }}</p></a>
 {% endfor %}
 {% endblock %}

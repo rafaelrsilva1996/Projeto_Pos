@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Lista de Epis´odios com nota {{ nota }}</h1>
+<h1>Lista de Episódios com nota: {{ nota }}</h1>
 
 <table>
     <tr><th>titulo</th><th>data</th><th>temporada</th></tr>
 {% for obj in objects %}
     <tr>
-        <td>{{obj.titulo}}</td>
+        <td><a href="{{ obj.get_absolute_url }}">{{obj.titulo}}</a></td>
         <td>{{obj.data}}</td>
         <td>{{obj.temporada.numero}}</td>
     </tr>

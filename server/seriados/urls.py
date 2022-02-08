@@ -6,6 +6,7 @@ app_name = 'seriados'
 
 urlpatterns = [
     path('series/', views.series_lista, name='series_lista'),
+    path('series/series_detalhes/<int:pk>', views.series_detalhes, name='series_detalhes'),
 
     path('episodio/<int:pk>/', views.episodio_detalhes, name='episodio_detalhes'),
 

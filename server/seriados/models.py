@@ -8,6 +8,10 @@ class Serie(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('seriados:series_detalhes', kwargs={'pk' : self.pk})
 
 
 class Temporada(models.Model):
@@ -22,9 +26,6 @@ class Episodio(models.Model):
 
     def __str__(self):
         return self.titulo
-
-    # def get_absolute_url(self):
-    #     return "/seriados/episodios/%i/" % self.id
     
     def get_absolute_url(self):
         from django.urls import reverse
