@@ -1,14 +1,22 @@
 from django.urls import path, re_path, include, register_converter
+from django.views.generic import TemplateView
 
 from . import views
 
 app_name = 'seriados'
 
 urlpatterns = [
-    path('series/', views.series_lista, name='series_lista'),
-    path('series/series_detalhes/<int:pk>', views.series_detalhes, name='series_detalhes'),
+    path('series/', views.series_list, name='series_list'),
+    path('series/<int:pk>', views.series_details, name='series_details'),
 
-    path('episodio/<int:pk>/', views.episodio_detalhes, name='episodio_detalhes'),
+    path('episodios/', views.episodio_list, name='episodio_list'),
+    path('episodios/<int:pk>/', views.episodio_details, name='episodio_details'),
+    path('episodios/nota/<str:nota>/', views.episodio_nota_list, name='episodio_nota_list'),
 
-    path('episodios/nota/<str:nota>/', views.episodio_lista_nota, name='episodio_lista_nota'),
+    path('temporadas/', views.TemporadaListView.as_view(), name='temporadas'),
+
+    path('sobre/', TemplateView.as_view(template_name="about.html"), name='about'),
+    path('contato/', views.Contact.as_view(), name='contact'),
+
+    path('', views.HomeView.as_view(), name='home'),
 ]

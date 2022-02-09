@@ -8,28 +8,27 @@ class Serie(models.Model):
 
     def __str__(self):
         return self.nome
-    
-    def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('seriados:series_detalhes', kwargs={'pk' : self.pk})
-
 
 class Temporada(models.Model):
     numero = models.IntegerField()
     serie = models.ForeignKey(Serie, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.serie.nome}: {self.numero}"
+
 
 class Episodio(models.Model):
     data = models.DateField()
-    titulo = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=200, verbose_name="Título")
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.titulo
+        nome_serie = self.temporada.serie.nome
+        return f"{nome_serie} - {self.temporada.numero}: {self.titulo}"
     
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('seriados:episodio_detalhes', kwargs={'pk' : self.pk})
+        return reverse('seriados:episodio_details', kwargs={'pk' : self.pk})
 
     def eh_antigo(self):
         import datetime
