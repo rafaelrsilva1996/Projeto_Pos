@@ -1,12 +1,20 @@
+import imp
 import re
+from tkinter.tix import Form
 from django import template
-from django.forms import model_to_dict
-from django.http import HttpResponse
+from django.forms import fields
+from django.forms.models import model_to_dict
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import context
-from django.views.generic import TemplateView, ListView, View, DetailView
+from django.urls import reverse
+
+from django.views import View
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Episodio, Revisor, Serie, Temporada, ReviewEpisodio
+from .forms import SerieForm, TemporadaForm
 
 def prepare_data_list(objects, fields_name):
     labels = list()
@@ -54,6 +62,25 @@ def series_details(request, pk):
     }
     return render(request, 'details.html', context)
 
+def serie_insert(request):
+    if request.method == 'GET':
+        form = SerieForm()
+    elif request.method == 'POST':
+        form = SerieForm(request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            obj = Serie(nome = nome)
+            obj.save()
+            return HttpResponseRedirect(reverse(
+                'seriados:serie_details',
+                kwargs = {'pk': obj.pk}
+            ))
+
+    return render(request, 'form_base.html', {
+        'form': form,
+        'target_url': 'seriados:serie_insert',
+    })
+
 def episodio_list(request):
     search = request.GET.get('search', "")
     objects = Episodio.objects.filter(titulo__contains=search)
@@ -84,6 +111,12 @@ def episodio_nota_list(request, nota):
         'detail_url': 'seriados:episodio_details',
     }
     return render(request, 'episodio_nota_list.html', context)
+
+
+class EpisodioCreateView(CreateView):
+    template_name = 'form_generic.html'
+    model = Episodio
+    fields = ['temporada', 'data', 'titulo']
 
 
 class Contact(TemplateView):
@@ -118,7 +151,26 @@ class TemporadaDetailView(View):
             'data': prepare_data_detail(_object, ['numero', 'serie']),
         }
         return render(request, 'details.html', context)
-    
+
+
+class TemporadaCreateView(CreateView):
+    template_name = "form_generic.html"
+    form_class = TemporadaForm
+
+
+class TemporadaUpdateView(UpdateView):
+    template_name = 'form_generic.html'
+    model = Temporada
+    fields = ['serie', 'numero']
+
+
+class TemporadaDeleteView(DeleteView):
+    template_name = "temporada_confirm_delete.html"
+    model = Temporada
+
+    def get_success_url(self):
+        return reverse('seriados:temporada_list')
+
 
 class RevisorListView(ListView):
     template_name = 'revisor_list.html'

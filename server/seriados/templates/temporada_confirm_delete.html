@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Quer deletar a temporada {{ object.numero }}
+    da Série {{ object.serie.nome }}? <br />
+
+    <form action="." method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+{% endblock %}
