@@ -1,26 +1,39 @@
+from tabnanny import verbose
 from tkinter import CASCADE
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 class Serie(models.Model):
-    nome = models.CharField(max_length=70)
+    nome = models.CharField(max_length=70, verbose_name="Nome")
+
+    class Meta:
+        verbose_name = "Série"
+        verbose_name_plural = "Séries"
 
     def __str__(self):
         return self.nome
 
 class Temporada(models.Model):
-    numero = models.IntegerField()
-    serie = models.ForeignKey(Serie, on_delete=models.CASCADE)
+    numero = models.IntegerField(verbose_name="Número")
+    serie = models.ForeignKey(Serie, on_delete=models.CASCADE, verbose_name="Série")
+
+    class Meta:
+        verbose_name = "Temporada"
+        verbose_name_plural = "Temporadas"
 
     def __str__(self):
         return f"{self.serie.nome}: {self.numero}"
 
 
 class Episodio(models.Model):
-    data = models.DateField()
+    data = models.DateField(verbose_name="Data")
     titulo = models.CharField(max_length=200, verbose_name="Título")
-    temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
+    temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE, verbose_name="Temporada")
+
+    class Meta:
+        verbose_name = "Episódio"
+        verbose_name_plural = "Episódios"
 
     def __str__(self):
         nome_serie = self.temporada.serie.nome
@@ -38,8 +51,15 @@ class Episodio(models.Model):
 
 
 class Revisor(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    reviews_episodios = models.ManyToManyField(Episodio, through='ReviewEpisodio')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuário")
+    reviews_episodios = models.ManyToManyField(Episodio, through='ReviewEpisodio', verbose_name="Review do Episódio")
+
+    class Meta:
+        verbose_name = "Revisor"
+        verbose_name_plural = "Revisores"
+    
+    def __str__(self):
+        return f"{self.user}"
 
 
 class ReviewEpisodio(models.Model):
@@ -53,10 +73,18 @@ class ReviewEpisodio(models.Model):
         (NOTA_C, "Ruim"),
     ]
 
-    episodio = models.ForeignKey(Episodio, on_delete=models.CASCADE)
-    revisor = models.ForeignKey(Revisor, on_delete=models.CASCADE)
+    episodio = models.ForeignKey(Episodio, on_delete=models.CASCADE, verbose_name="Episódio")
+    revisor = models.ForeignKey(Revisor, on_delete=models.CASCADE, verbose_name="Revisor")
     nota = models.CharField(
         max_length=1,
         choices=NOTAS_CHOICES,
-        default=NOTA_B
+        default=NOTA_B,
+        verbose_name="Nota"
     )
+
+    class Meta:
+        verbose_name = "Review do Episódio"
+        verbose_name_plural = "Reviews dos Episódios"
+    
+    def __str__(self):
+        return f"{self.episodio}: {self.revisor}"

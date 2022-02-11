@@ -6,4 +6,6 @@
 {% for row in data %}
     <p><b>{{ row.label }}</b>: {{ row.value }}</p>
 {% endfor %}
+
+<p><a href={% url 'seriados:home' %}>Home</a></p>
 {% endblock %}

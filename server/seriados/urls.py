@@ -13,7 +13,8 @@ urlpatterns = [
     path('episodios/<int:pk>/', views.episodio_details, name='episodio_details'),
     path('episodios/nota/<str:nota>/', views.episodio_nota_list, name='episodio_nota_list'),
 
-    path('temporadas/', views.TemporadaListView.as_view(), name='temporadas'),
+    path('temporadas/', views.TemporadaListView.as_view(), name='temporada_list'),
+    path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),
 
     path('sobre/', TemplateView.as_view(template_name="about.html"), name='about'),
     path('contato/', views.Contact.as_view(), name='contact'),

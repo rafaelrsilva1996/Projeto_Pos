@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Lista de Episódios com nota: {{ nota }}</h1>
 
-<table>
+<table border="1px">
     <tr>
         <th>titulo</th>
         <th>data</th>
@@ -14,6 +14,7 @@
         <td>{{obj.titulo}}</td>
         <td>{{obj.data}}</td>
         <td>{{obj.temporada.numero}}</td>
+        <td><a href="{% url detail_url pk=obj.pk %}">Ver...</a></td>
     </tr>
 {% endfor %}
 </table>
