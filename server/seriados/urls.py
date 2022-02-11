@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.urls import path, re_path, include, register_converter
 from django.views.generic import TemplateView
 
@@ -15,6 +16,12 @@ urlpatterns = [
 
     path('temporadas/', views.TemporadaListView.as_view(), name='temporada_list'),
     path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),
+
+    path('revisores/', views.RevisorListView.as_view(), name='revisor_list'),
+    path('revisores/<int:pk>', views.RevisorDetailView.as_view(), name='revisor_details'),
+
+    path('reviewepisodios/', views.ReviewEpisodioListView.as_view(), name='reviewepisodio_list'),
+    path('reviewepisodios/<int:pk>', views.ReviewEpisodioDetailView.as_view(), name='reviewepisodio_details'),
 
     path('sobre/', TemplateView.as_view(template_name="about.html"), name='about'),
     path('contato/', views.Contact.as_view(), name='contact'),

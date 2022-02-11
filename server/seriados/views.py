@@ -1,11 +1,12 @@
 import re
+from django import template
 from django.forms import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import context
 from django.views.generic import TemplateView, ListView, View, DetailView
 
-from .models import Episodio, Serie, Temporada
+from .models import Episodio, Revisor, Serie, Temporada, ReviewEpisodio
 
 def prepare_data_list(objects, fields_name):
     labels = list()
@@ -94,22 +95,20 @@ class HomeView(View):
         return render(request, 'home.html', {})
 
 
-class TemporadaListView(ListView):
-    template_name = 'list.html'
-    model = Temporada
-    def get_context_data(self, **kwargs):
-        search = self.request.GET.get('search', "")
+class TemporadaListView(View):
+    def get(self, request):
+        search = request.GET.get('search', "")
         objects = Temporada.objects.filter(serie__nome__contains=search)
         labels, rows = prepare_data_list(objects, ['numero', 'serie'])
-
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Temporadas'
-        context['book_list'] = objects
-        context['labels'] = labels
-        context['rows'] = rows
-        context['detail_url'] = 'seriados:temporada_details'
-        context['list_url'] = 'seriados:temporada_list'
-        return context
+        context = {
+            'book_list': objects,
+            'title': 'Temporadas',
+            'labels': labels,
+            'rows': rows,
+            'detail_url': 'seriados:temporada_details',
+            'list_url': 'seriados:temporada_list',
+        }
+        return render(request, 'list.html', context)
 
 class TemporadaDetailView(View):
     def get(self, request, pk):
@@ -119,3 +118,23 @@ class TemporadaDetailView(View):
             'data': prepare_data_detail(_object, ['numero', 'serie']),
         }
         return render(request, 'details.html', context)
+    
+
+class RevisorListView(ListView):
+    template_name = 'revisor_list.html'
+    model = Revisor
+
+
+class RevisorDetailView(DetailView):
+    template_name = 'revisor_details.html'
+    model = Revisor
+
+
+class ReviewEpisodioListView(ListView):
+    template_name = 'reviewepisodio_list.html'
+    model = ReviewEpisodio
+
+
+class ReviewEpisodioDetailView(DetailView):
+    template_name = 'reviewepisodio_details.html'
+    model = ReviewEpisodio

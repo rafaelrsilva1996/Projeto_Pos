@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Detalhes de {{ title }}</h1>
+
+<p><b>User</b>: {{ object.user }}</p>
+<p><b>Reviews</b>: {{ object.reviews_episodios }}</p>
+
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+{% endblock %}

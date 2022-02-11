@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Lista de {{ title }}</h1>
+
+<table border="1px">
+    <tr>
+        <th>Episódio</th>
+        <th>Revisor</th>
+        <th>Nota</th>
+    </tr>
+
+    {% for object in object_list %}
+        <tr>
+            <td>{{ object.episodio }}</td>
+            <td>{{ object.revisor }}</td>
+            <td>{{ object.nota }}</td>
+            <td><a href="{% url 'seriados:reviewepisodio_details' pk=object.pk %}">Ver...</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+{% endblock %}
