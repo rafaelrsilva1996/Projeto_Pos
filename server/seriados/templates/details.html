@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+
 <h1>Detalhes de {{ title }}</h1>
+
+<p><a href="{% url update_url pk=pk %}">Atualizar {{ title }}</a></p>
+<p><a href="{% url delete_url pk=pk %}">Deletar {{ title }}</a></p>
 
 {% for row in data %}
     <p><b>{{ row.label }}</b>: {{ row.value }}</p>
 {% endfor %}
-
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 {% endblock %}

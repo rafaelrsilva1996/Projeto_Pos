@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+
 <h1>Lista de Episódios com nota {{ nota }}</h1>
 
 <table>
@@ -17,6 +19,4 @@
     </tr>
 {% endfor %}
 </table>
-
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 {% endblock %}

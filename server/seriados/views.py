@@ -140,6 +140,7 @@ class TemporadaListView(View):
             'rows': rows,
             'detail_url': 'seriados:temporada_details',
             'list_url': 'seriados:temporada_list',
+            'insert_url': 'seriados:temporada_insert',
         }
         return render(request, 'list.html', context)
 
@@ -149,6 +150,9 @@ class TemporadaDetailView(View):
         context = {
             'title': "Temporada",
             'data': prepare_data_detail(_object, ['numero', 'serie']),
+            'update_url': 'seriados:temporada_update',
+            'delete_url': 'seriados:temporada_delete',
+            'pk': pk,
         }
         return render(request, 'details.html', context)
 

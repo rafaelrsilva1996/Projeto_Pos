@@ -1,25 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Lista de {{ title }}</h1> 
-
-<table border="1px">
-    <tr>
-        {% for label in labels %}
-            <th>{{ label }}</th>
-        {% endfor %}
-        <th>Detalhes</th>
-    </tr>
-
-    {% for row in rows %}
-        <tr>
-            {% for value in row.data %}
-                <td>{{ value }}</td>
-            {% endfor %}
-            <td><a href="{% url detail_url pk=row.pk %}">Ver...</a></td>
-        </tr>
-    {% endfor %}
-</table>
+<p><a href={% url 'seriados:home' %}>Home</a></p>
 
 <h3>Procurar {{ title }}</h3>
 
@@ -42,5 +24,25 @@
     });
 </script>
 
-<p><a href={% url 'seriados:home' %}>Home</a></p>
+<p><a href='{% url insert_url %}'>Inserir {{ title }}</a></p>
+
+<h1>Lista de {{ title }}</h1> 
+
+<table border="1px">
+    <tr>
+        {% for label in labels %}
+            <th>{{ label }}</th>
+        {% endfor %}
+        <th>Detalhes</th>
+    </tr>
+
+    {% for row in rows %}
+        <tr>
+            {% for value in row.data %}
+                <td>{{ value }}</td>
+            {% endfor %}
+            <td><a href="{% url detail_url pk=row.pk %}">Ver...</a></td>
+        </tr>
+    {% endfor %}
+</table>
 {% endblock %}

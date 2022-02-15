@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Quer deletar a temporada {{ object.numero }}
-    da Série {{ object.serie.nome }}? <br />
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+
+    Quer deletar a temporada <b>{{ object.numero }}</b>
+    da Série: <b>{{ object.serie.nome }}</b>? <br />
 
     <form action="." method="post">
         {% csrf_token %}

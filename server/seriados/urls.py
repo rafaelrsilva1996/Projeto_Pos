@@ -20,7 +20,7 @@ urlpatterns = [
     path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),
     path('temporadas/inserir/', views.TemporadaCreateView.as_view(), name='temporada_insert'),
     path('temporadas/<int:pk>/editar/', views.TemporadaUpdateView.as_view(), name='temporada_update'),
-    path('temporadas/<int:pk>/excluir/', views.TemporadaDeleteView.as_view(), name='temporada_excluir'),
+    path('temporadas/<int:pk>/excluir/', views.TemporadaDeleteView.as_view(), name='temporada_delete'),
 
     path('revisores/', views.RevisorListView.as_view(), name='revisor_list'),
     path('revisores/<int:pk>', views.RevisorDetailView.as_view(), name='revisor_details'),
