@@ -3,8 +3,9 @@
 {% block content %}
 <p><a href={% url 'seriados:home' %}>Home</a></p>
 
-    Quer deletar a Temporada <b>{{ object.numero }}</b>
-    da Série: <b>{{ object.serie.nome }}</b>? <br />
+    Quer deletar o Episódio: <b>{{ object.titulo }}</b>
+    da Temporada: <b>{{ object.temporada }}</b>
+    lançado em: <b>{{ object.data }}</b>?
 
     <form action="." method="post">
         {% csrf_token %}

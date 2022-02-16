@@ -10,11 +10,15 @@ urlpatterns = [
     path('series/', views.series_list, name='series_list'),
     path('series/<int:pk>', views.series_details, name='series_details'),
     path('series/inserir/', views.serie_insert, name='serie_insert'),
+    path('series/<int:pk>/editar/', views.SerieUpdateView.as_view(), name='serie_update'),
+    path('series/<int:pk>/excluir/', views.SerieDeleteView.as_view(), name='serie_delete'),
 
     path('episodios/', views.episodio_list, name='episodio_list'),
     path('episodios/<int:pk>/', views.episodio_details, name='episodio_details'),
     path('episodios/nota/<str:nota>/', views.episodio_nota_list, name='episodio_nota_list'),
     path('episodios/inserir>/', views.EpisodioCreateView.as_view(), name='episodio_insert'),
+    path('episodios/<int:pk>/editar/', views.EpisodioUpdateView.as_view(), name='episodio_update'),
+    path('episodios/<int:pk>/excluir/', views.EpisodioDeleteView.as_view(), name='episodio_delete'),
 
     path('temporadas/', views.TemporadaListView.as_view(), name='temporada_list'),
     path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),

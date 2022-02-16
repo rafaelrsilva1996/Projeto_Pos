@@ -3,7 +3,7 @@
 {% block content %}
 <p><a href={% url 'seriados:home' %}>Home</a></p>
 
-    Quer deletar o revisor: <b>{{ object.user }}</b>?
+    Quer deletar o Revisor: <b>{{ object.user }}</b>?
 
     <form action="." method="post">
         {% csrf_token %}

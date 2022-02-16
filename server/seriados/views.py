@@ -51,6 +51,7 @@ def series_list(request):
         'rows': rows,
         'detail_url': 'seriados:series_details',
         'list_url': 'seriados:series_list',
+        'insert_url': 'seriados:serie_insert',
     }
     return render(request, 'list.html', context)
 
@@ -59,6 +60,9 @@ def series_details(request, pk):
     context = {
         'title': "Série",
         'data': prepare_data_detail(_object, ['nome']),
+        'update_url': 'seriados:serie_update',
+        'delete_url': 'seriados:serie_delete',
+        'pk': pk,
     }
     return render(request, 'details.html', context)
 
@@ -72,7 +76,7 @@ def serie_insert(request):
             obj = Serie(nome = nome)
             obj.save()
             return HttpResponseRedirect(reverse(
-                'seriados:serie_details',
+                'seriados:series_details',
                 kwargs = {'pk': obj.pk}
             ))
 
@@ -80,6 +84,20 @@ def serie_insert(request):
         'form': form,
         'target_url': 'seriados:serie_insert',
     })
+
+
+class SerieUpdateView(UpdateView):
+    template_name = 'form_generic.html'
+    model = Serie
+    fields = ['nome']
+
+
+class SerieDeleteView(DeleteView):
+    template_name = "serie_confirm_delete.html"
+    model = Serie
+
+    def get_success_url(self):
+        return reverse('seriados:serie_list')
 
 def episodio_list(request):
     search = request.GET.get('search', "")
@@ -121,6 +139,20 @@ class EpisodioCreateView(CreateView):
     template_name = 'form_generic.html'
     model = Episodio
     fields = ['temporada', 'data', 'titulo']
+
+
+class EpisodioUpdateView(UpdateView):
+    template_name = 'form_generic.html'
+    model = Episodio
+    fields = ['temporada', 'data', 'titulo']
+
+
+class EpisodioDeleteView(DeleteView):
+    template_name = "episodio_confirm_delete.html"
+    model = Episodio
+
+    def get_success_url(self):
+        return reverse('seriados:episodio_list')
 
 
 class Contact(TemplateView):
