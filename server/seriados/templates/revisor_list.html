@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Lista de {{ title }}</h1>
+<p><a href={% url 'seriados:home' %}>Home</a></p>
+
+<p><a href={% url 'seriados:revisor_insert' %}>Inserir Revisor</a></p>
+
+<h1>Lista de Revisores</h1>
 
 <table border="1px">
     <tr>
@@ -17,6 +21,4 @@
         </tr>
     {% endfor %}
 </table>
-
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 {% endblock %}

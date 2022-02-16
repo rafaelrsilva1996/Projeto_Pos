@@ -14,7 +14,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Episodio, Revisor, Serie, Temporada, ReviewEpisodio
-from .forms import SerieForm, TemporadaForm
+from .forms import SerieForm, TemporadaForm, RevisorForm, ReviewEpisodioForm
 
 def prepare_data_list(objects, fields_name):
     labels = list()
@@ -91,6 +91,7 @@ def episodio_list(request):
         'rows':rows,
         'detail_url': 'seriados:episodio_details',
         'list_url': 'seriados:episodio_list',
+        'insert_url': 'seriados:episodio_insert',
         }
     return render(request, 'list.html', context)
 
@@ -99,6 +100,9 @@ def episodio_details(request, pk):
     context = {
         'title': "Episódio",
         'data': prepare_data_detail(_object, ['titulo', 'data', 'temporada']),
+        'update_url': 'seriados:episodio_update',
+        'delete_url': 'seriados:episodio_delete',
+        'pk': pk,
     }
     return render(request, 'details.html', context)
 
@@ -186,6 +190,25 @@ class RevisorDetailView(DetailView):
     model = Revisor
 
 
+class RevisorCreateView(CreateView):
+    template_name = "form_generic.html"
+    form_class = RevisorForm
+
+
+class RevisorUpdateView(UpdateView):
+    template_name = 'form_generic.html'
+    model = Revisor
+    fields = ['user']
+
+
+class RevisorDeleteView(DeleteView):
+    template_name = "revisor_confirm_delete.html"
+    model = Revisor
+
+    def get_success_url(self):
+        return reverse('seriados:revisor_list')
+
+
 class ReviewEpisodioListView(ListView):
     template_name = 'reviewepisodio_list.html'
     model = ReviewEpisodio
@@ -194,3 +217,22 @@ class ReviewEpisodioListView(ListView):
 class ReviewEpisodioDetailView(DetailView):
     template_name = 'reviewepisodio_details.html'
     model = ReviewEpisodio
+
+
+class ReviewEpisodioCreateView(CreateView):
+    template_name = "form_generic.html"
+    form_class = ReviewEpisodioForm
+
+
+class ReviewEpisodioUpdateView(UpdateView):
+    template_name = 'form_generic.html'
+    model = ReviewEpisodio
+    fields = ['episodio', 'revisor', 'nota']
+
+
+class ReviewEpisodioDeleteView(DeleteView):
+    template_name = "reviewepisodio_list_confirm_delete.html"
+    model = ReviewEpisodio
+
+    def get_success_url(self):
+        return reverse('seriados:reviewepisodio_list_list')

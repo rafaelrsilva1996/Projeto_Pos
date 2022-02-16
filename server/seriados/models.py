@@ -13,6 +13,10 @@ class Serie(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('seriados:series_details', kwargs={'pk' : self.pk})
 
 class Temporada(models.Model):
     numero = models.IntegerField(verbose_name="Número")
@@ -24,6 +28,10 @@ class Temporada(models.Model):
 
     def __str__(self):
         return f"{self.serie.nome}: {self.numero}"
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('seriados:temporada_details', kwargs={'pk' : self.pk})
 
 
 class Episodio(models.Model):
@@ -60,6 +68,10 @@ class Revisor(models.Model):
     
     def __str__(self):
         return f"{self.user}"
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('seriados:revisor_details', kwargs={'pk' : self.pk})
 
 
 class ReviewEpisodio(models.Model):
@@ -88,3 +100,7 @@ class ReviewEpisodio(models.Model):
     
     def __str__(self):
         return f"{self.episodio}: {self.revisor}"
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('seriados:reviewepisodio_details', kwargs={'pk' : self.pk})

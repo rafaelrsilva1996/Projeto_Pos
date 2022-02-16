@@ -3,7 +3,10 @@
 {% block content %}
 <p><a href={% url 'seriados:home' %}>Home</a></p>
 
-<h1>Detalhes de {{ title }}</h1>
+<h1>Detalhes do Revisor</h1>
+
+<p><a href="{% url 'seriados:revisor_update' pk=object.pk %}">Atualizar Revisor</a></p>
+<p><a href="{% url 'seriados:revisor_delete' pk=object.pk %}">Deletar Revisor</a></p>
 
 <p><b>User</b>: {{ object.user }}</p>
 <p><b>Reviews</b>: {{ object.reviews_episodios }}</p>

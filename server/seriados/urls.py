@@ -14,7 +14,7 @@ urlpatterns = [
     path('episodios/', views.episodio_list, name='episodio_list'),
     path('episodios/<int:pk>/', views.episodio_details, name='episodio_details'),
     path('episodios/nota/<str:nota>/', views.episodio_nota_list, name='episodio_nota_list'),
-    path('episodios/inserir>/', views.EpisodioCreateView.as_view, name='episodio_insert'),
+    path('episodios/inserir>/', views.EpisodioCreateView.as_view(), name='episodio_insert'),
 
     path('temporadas/', views.TemporadaListView.as_view(), name='temporada_list'),
     path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),
@@ -24,9 +24,15 @@ urlpatterns = [
 
     path('revisores/', views.RevisorListView.as_view(), name='revisor_list'),
     path('revisores/<int:pk>', views.RevisorDetailView.as_view(), name='revisor_details'),
+    path('revisores/inserir/', views.RevisorCreateView.as_view(), name='revisor_insert'),
+    path('revisores/<int:pk>/editar/', views.RevisorUpdateView.as_view(), name='revisor_update'),
+    path('revisores/<int:pk>/excluir/', views.RevisorDeleteView.as_view(), name='revisor_delete'),
 
     path('reviewepisodios/', views.ReviewEpisodioListView.as_view(), name='reviewepisodio_list'),
     path('reviewepisodios/<int:pk>', views.ReviewEpisodioDetailView.as_view(), name='reviewepisodio_details'),
+    path('reviewepisodios/inserir/', views.ReviewEpisodioCreateView.as_view(), name='reviewepisodio_insert'),
+    path('reviewepisodios/<int:pk>/editar/', views.ReviewEpisodioUpdateView.as_view(), name='reviewepisodio_update'),
+    path('reviewepisodios/<int:pk>/excluir/', views.ReviewEpisodioDeleteView.as_view(), name='reviewepisodio_delete'),
 
     path('sobre/', TemplateView.as_view(template_name="about.html"), name='about'),
     path('contato/', views.Contact.as_view(), name='contact'),
