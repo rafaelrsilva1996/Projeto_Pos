@@ -52,6 +52,8 @@ def series_list(request):
         'detail_url': 'seriados:series_details',
         'list_url': 'seriados:series_list',
         'insert_url': 'seriados:serie_insert',
+        'update_url': 'seriados:serie_update',
+        'delete_url': 'seriados:serie_delete',
     }
     return render(request, 'list.html', context)
 
@@ -110,6 +112,8 @@ def episodio_list(request):
         'detail_url': 'seriados:episodio_details',
         'list_url': 'seriados:episodio_list',
         'insert_url': 'seriados:episodio_insert',
+        'update_url': 'seriados:episodio_update',
+        'delete_url': 'seriados:episodio_delete',
         }
     return render(request, 'list.html', context)
 
@@ -177,6 +181,8 @@ class TemporadaListView(View):
             'detail_url': 'seriados:temporada_details',
             'list_url': 'seriados:temporada_list',
             'insert_url': 'seriados:temporada_insert',
+            'update_url': 'seriados:temporada_update',
+            'delete_url': 'seriados:temporada_delete',
         }
         return render(request, 'list.html', context)
 
@@ -263,7 +269,7 @@ class ReviewEpisodioUpdateView(UpdateView):
 
 
 class ReviewEpisodioDeleteView(DeleteView):
-    template_name = "reviewepisodio_list_confirm_delete.html"
+    template_name = "reviewepisodio_confirm_delete.html"
     model = ReviewEpisodio
 
     def get_success_url(self):

@@ -11,6 +11,8 @@
     <tr>
         <th>User</th>
         <th>Reviews</th>
+        <th>Detalhes</th>
+        <th colspan="2">Ações</th>
     </tr>
 
     {% for object in object_list %}
@@ -18,6 +20,8 @@
             <td>{{ object.user }}</td>
             <td>{{ object.reviews_episodios }}</td>
             <td><a href="{% url 'seriados:revisor_details' pk=object.pk %}">Ver...</a></td>
+            <td><a href="{% url 'seriados:revisor_update' pk=object.pk %}">Editar...</a></td>
+            <td><a href="{% url 'seriados:revisor_delete' pk=object.pk %}">Deletar...</a></td>
         </tr>
     {% endfor %}
 </table>

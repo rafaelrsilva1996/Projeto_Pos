@@ -34,6 +34,7 @@
             <th>{{ label }}</th>
         {% endfor %}
         <th>Detalhes</th>
+        <th colspan="2">Ações</th>
     </tr>
 
     {% for row in rows %}
@@ -42,6 +43,8 @@
                 <td>{{ value }}</td>
             {% endfor %}
             <td><a href="{% url detail_url pk=row.pk %}">Ver...</a></td>
+            <td><a href="{% url update_url pk=row.pk %}">Editar...</a></td>
+            <td><a href="{% url delete_url pk=row.pk %}">Deletar...</a></td>
         </tr>
     {% endfor %}
 </table>
