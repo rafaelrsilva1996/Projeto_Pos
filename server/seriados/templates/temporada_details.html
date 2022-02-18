@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 
-    <b>Série</b>: {{ object.serie.nome }} <br />
-    <b>Temporada</b>: {{ object.numero }} <br />
+<b>Série</b>: {{ object.serie.nome }} <br />
+<b>Temporada</b>: {{ object.numero }} <br />
 {% endblock %}

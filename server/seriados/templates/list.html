@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
-
-<h3>Procurar {{ title }}</h3>
-
-<input id='input_search' type="text" placeholder="Search..">
-<button id="btn_search">Procurar {{ title }}</button>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous">
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#btn_search").click(function() {
-            search = $("#input_search").val();
-            url = '{% url list_url %}' + '?' +
-                $.param({search:search});
-            window.location.href = url;
+<div class="text-center">
+    <h3>Procurar {{ title }}</h3>
+    
+    <input id='input_search' type="text" placeholder="Search..">
+    <button id="btn_search">Procurar {{ title }}</button>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btn_search").click(function() {
+                search = $("#input_search").val();
+                url = '{% url list_url %}' + '?' +
+                    $.param({search:search});
+                window.location.href = url;
+            });
         });
-    });
-</script>
+    </script>
+</div>
 
 <p><a href='{% url insert_url %}'>Inserir {{ title }}</a></p>
 
@@ -34,7 +34,7 @@
             <th>{{ label }}</th>
         {% endfor %}
         <th>Detalhes</th>
-        <th colspan="2">Ações</th>
+        <th colspan="2" class="text-center">Ações</th>
     </tr>
 
     {% for row in rows %}

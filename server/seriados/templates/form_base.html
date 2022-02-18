@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 
 <form action={% url target_url %} method="post">
     {% csrf_token %}

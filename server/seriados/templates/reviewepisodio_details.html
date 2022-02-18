@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 
 <p><a href="{% url 'seriados:reviewepisodio_update' pk=object.pk %}">Atualizar Review do Episódio</a></p>
 <p><a href="{% url 'seriados:reviewepisodio_delete' pk=object.pk %}">Deletar Review do Episódio</a></p>

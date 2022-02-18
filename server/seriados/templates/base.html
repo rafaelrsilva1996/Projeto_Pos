@@ -15,20 +15,21 @@
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <nav class="navbar navbar-expand_lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    {% block navbar %}
-                        {% include 'navbar.html' %}
-                    {% endblock %}
-                </div>
-            </nav>
-            
-            {% block content %}
-                <p>Não há nenhum conteúdo aqui!</p>
-            {% endblock %}
-        </div>
+            <div class="container-fluid">
+                {% block navbar %}
+                {% include 'navbar.html' %}
+                {% endblock %}
+            </div>
+        </nav>
+        
+        {% block content %}
+        <p>Não há nenhum conteúdo aqui!</p>
+        {% endblock %}
     </body>
 </html>

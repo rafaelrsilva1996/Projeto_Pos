@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 
-    Quer deletar o Review do Episódio: <b>{{ object.episodio }}</b>,
-    do Revisor: <b>{{ object.revisor }}</b>, que tem a nota <b>{{ object.nota }}</b>? <br />
+Quer deletar o Review do Episódio: <b>{{ object.episodio }}</b>,
+do Revisor: <b>{{ object.revisor }}</b>, que tem a nota <b>{{ object.nota }}</b>? <br />
 
-    <form action="." method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-    </form>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
 {% endblock %}

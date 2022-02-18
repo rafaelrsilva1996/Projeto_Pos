@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href={% url 'seriados:home' %}>Home</a></p>
 
-    Quer deletar o Revisor: <b>{{ object.user }}</b>?
+Quer deletar o Revisor: <b>{{ object.user }}</b>?
 
-    <form action="." method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-    </form>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
 {% endblock %}
