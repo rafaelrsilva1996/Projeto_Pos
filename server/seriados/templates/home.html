@@ -2,13 +2,24 @@
 {% load static %}
 {% block content %}
 
-<div class="row">
-    <div class="col-6 col-md-8">
-        <h3>Procurar episódio</h3>
-        <input id='input_search' type="text" placeholder="Search..">
-        <button id="btn_search">Procurar Episódio</button>
+
+<div class="row pesquisar my-3">
+    <div class="col-6 col-md-8 text-center">
+        <h3>Procurar Episódio</h3>
+        <div class="form-pesquisar">
+            <input class="form-control" id='input_search' type="text" placeholder="Search..">
+            <button class="btn btn-primary ml-2" id="btn_search">Procurar</button>
+        </div>
     </div>
 </div>
+
+<h3 class="text-center"><b>Especialização em Tecnologia Python para Negócios</b></h3>
+<h3 class="text-center"><b>M3.Python para WEB</b></h3>
+
+<div class="text-center">
+    <img src="{% static 'img/utfpr.jpg' %}" class="img-fluid rounded img-thumbnail">
+</div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("#btn_search").click(function() {
