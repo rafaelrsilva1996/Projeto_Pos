@@ -55,7 +55,7 @@ def series_list(request):
         'update_url': 'seriados:serie_update',
         'delete_url': 'seriados:serie_delete',
     }
-    return render(request, 'list.html', context)
+    return render(request, 'generic/list.html', context)
 
 def series_details(request, pk):
     _object = get_object_or_404(Serie, pk=pk)
@@ -66,7 +66,7 @@ def series_details(request, pk):
         'delete_url': 'seriados:serie_delete',
         'pk': pk,
     }
-    return render(request, 'details.html', context)
+    return render(request, 'generic/details.html', context)
 
 def serie_insert(request):
     if request.method == 'GET':
@@ -82,20 +82,20 @@ def serie_insert(request):
                 kwargs = {'pk': obj.pk}
             ))
 
-    return render(request, 'form_base.html', {
+    return render(request, 'form/form_base.html', {
         'form': form,
         'target_url': 'seriados:serie_insert',
     })
 
 
 class SerieUpdateView(UpdateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = Serie
     fields = ['nome']
 
 
 class SerieDeleteView(DeleteView):
-    template_name = "serie_confirm_delete.html"
+    template_name = "serie/serie_confirm_delete.html"
     model = Serie
 
     def get_success_url(self):
@@ -115,7 +115,7 @@ def episodio_list(request):
         'update_url': 'seriados:episodio_update',
         'delete_url': 'seriados:episodio_delete',
         }
-    return render(request, 'list.html', context)
+    return render(request, 'generic/list.html', context)
 
 def episodio_details(request, pk):
     _object = get_object_or_404(Episodio, pk=pk)
@@ -126,7 +126,7 @@ def episodio_details(request, pk):
         'delete_url': 'seriados:episodio_delete',
         'pk': pk,
     }
-    return render(request, 'details.html', context)
+    return render(request, 'generic/details.html', context)
 
 def episodio_nota_list(request, nota):
     search = request.GET.get('search', "")
@@ -136,23 +136,23 @@ def episodio_nota_list(request, nota):
         'nota':nota,
         'detail_url': 'seriados:episodio_details',
     }
-    return render(request, 'episodio_nota_list.html', context)
+    return render(request, 'episodio/episodio_nota_list.html', context)
 
 
 class EpisodioCreateView(CreateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = Episodio
     fields = ['temporada', 'data', 'titulo']
 
 
 class EpisodioUpdateView(UpdateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = Episodio
     fields = ['temporada', 'data', 'titulo']
 
 
 class EpisodioDeleteView(DeleteView):
-    template_name = "episodio_confirm_delete.html"
+    template_name = "episodio/episodio_confirm_delete.html"
     model = Episodio
 
     def get_success_url(self):
@@ -184,7 +184,7 @@ class TemporadaListView(View):
             'update_url': 'seriados:temporada_update',
             'delete_url': 'seriados:temporada_delete',
         }
-        return render(request, 'list.html', context)
+        return render(request, 'generic/list.html', context)
 
 class TemporadaDetailView(View):
     def get(self, request, pk):
@@ -196,22 +196,22 @@ class TemporadaDetailView(View):
             'delete_url': 'seriados:temporada_delete',
             'pk': pk,
         }
-        return render(request, 'details.html', context)
+        return render(request, 'generic/details.html', context)
 
 
 class TemporadaCreateView(CreateView):
-    template_name = "form_generic.html"
+    template_name = "form/form_generic.html"
     form_class = TemporadaForm
 
 
 class TemporadaUpdateView(UpdateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = Temporada
     fields = ['serie', 'numero']
 
 
 class TemporadaDeleteView(DeleteView):
-    template_name = "temporada_confirm_delete.html"
+    template_name = "temporada/temporada_confirm_delete.html"
     model = Temporada
 
     def get_success_url(self):
@@ -219,28 +219,28 @@ class TemporadaDeleteView(DeleteView):
 
 
 class RevisorListView(ListView):
-    template_name = 'revisor_list.html'
+    template_name = 'revisor/revisor_list.html'
     model = Revisor
 
 
 class RevisorDetailView(DetailView):
-    template_name = 'revisor_details.html'
+    template_name = 'revisor/revisor_details.html'
     model = Revisor
 
 
 class RevisorCreateView(CreateView):
-    template_name = "form_generic.html"
+    template_name = "form/form_generic.html"
     form_class = RevisorForm
 
 
 class RevisorUpdateView(UpdateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = Revisor
     fields = ['user']
 
 
 class RevisorDeleteView(DeleteView):
-    template_name = "revisor_confirm_delete.html"
+    template_name = "revisor/revisor_confirm_delete.html"
     model = Revisor
 
     def get_success_url(self):
@@ -248,29 +248,29 @@ class RevisorDeleteView(DeleteView):
 
 
 class ReviewEpisodioListView(ListView):
-    template_name = 'reviewepisodio_list.html'
+    template_name = 'reviewepisodio/reviewepisodio_list.html'
     model = ReviewEpisodio
 
 
 class ReviewEpisodioDetailView(DetailView):
-    template_name = 'reviewepisodio_details.html'
+    template_name = 'reviewepisodio/reviewepisodio_details.html'
     model = ReviewEpisodio
 
 
 class ReviewEpisodioCreateView(CreateView):
-    template_name = "form_generic.html"
+    template_name = "form/form_generic.html"
     form_class = ReviewEpisodioForm
 
 
 class ReviewEpisodioUpdateView(UpdateView):
-    template_name = 'form_generic.html'
+    template_name = 'form/form_generic.html'
     model = ReviewEpisodio
     fields = ['episodio', 'revisor', 'nota']
 
 
 class ReviewEpisodioDeleteView(DeleteView):
-    template_name = "reviewepisodio_confirm_delete.html"
+    template_name = "reviewepisodio/reviewepisodio_confirm_delete.html"
     model = ReviewEpisodio
 
     def get_success_url(self):
-        return reverse('seriados:reviewepisodio_list_list')
+        return reverse('seriados:reviewepisodio_list')
