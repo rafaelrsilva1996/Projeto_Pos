@@ -60,7 +60,7 @@ class Episodio(models.Model):
 
 class Revisor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuário")
-    reviews_episodios = models.ManyToManyField(Episodio, through='ReviewEpisodio', verbose_name="Review do Episódio")
+    reviews_episodios = models.ManyToManyField(Episodio, through='ReviewEpisodio', related_name='review', verbose_name="Review do Episódio")
 
     class Meta:
         verbose_name = "Revisor"

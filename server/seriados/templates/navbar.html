@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 
 <a class="navbar-brand" href={% url 'seriados:home' %}>Home</a>
-<a class="navbar-brand" href={% url 'seriados:series_list' %}>Séries</a>
-<a class="navbar-brand" href={% url 'seriados:temporada_list' %}>Temporadas</a>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+        Apps
+    </button>
+    
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="{% url 'seriados:series_list' %}">Séries</a></li>
+        <li><a class="dropdown-item" href="{% url 'seriados:temporada_list' %}">Temporadas</a></li>
+        <li><a class="dropdown-item" href="{% url 'seriados:episodio_list' %}">Episódios</a></li>
+        <li><a class="dropdown-item" href="{% url 'seriados:revisor_list' %}">Revisores</a></li>
+        <li><a class="dropdown-item" href="{% url 'seriados:reviewepisodio_list' %}">Reviews</a></li>
+    </ul>
+</div>
 
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">

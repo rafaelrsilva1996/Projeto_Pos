@@ -1,40 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center">
-    <h3>Procurar {{ title }}</h3>
+<div class="row pesquisar my-3">
+    <div class="col-6 col-md-8 text-center">
+        <h3>Procurar {{ title }}</h3>
+        <div class="flex-row">
+            <input class="form-control" id='input_search' type="text" placeholder="Search..">
+            <button class="btn btn-primary ml-2" id="btn_search">Procurar</button>
+        </div>
+    </div>
     
-    <input id='input_search' type="text" placeholder="Search..">
-    <button id="btn_search">Procurar {{ title }}</button>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous">
-    </script>
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#btn_search").click(function() {
-                search = $("#input_search").val();
-                url = '{% url list_url %}' + '?' +
-                    $.param({search:search});
-                window.location.href = url;
-            });
-        });
-    </script>
 </div>
 
-<p><a href='{% url insert_url %}'>Inserir {{ title }}</a></p>
-
-<h1>Lista de {{ title }}</h1> 
+<div class="flex-row">
+    <h1 class="mt-1">Lista de {{ title }}</h1>
+    <p><a href='{% url insert_url %}'><h3><i class="fa-solid fa-plus mt-3 ml-2" title="Inserir"></i></h3></a></p>
+</div>
 
 <table class="table table-hover table-striped">
     <tr>
         {% for label in labels %}
             <th>{{ label }}</th>
         {% endfor %}
-        <th>Detalhes</th>
-        <th colspan="2" class="text-center">Ações</th>
+        <th class="text-center">Ações</th>
     </tr>
 
     {% for row in rows %}
@@ -42,10 +30,26 @@
             {% for value in row.data %}
                 <td>{{ value }}</td>
             {% endfor %}
-            <td><a href="{% url detail_url pk=row.pk %}">Ver...</a></td>
-            <td><a href="{% url update_url pk=row.pk %}">Editar...</a></td>
-            <td><a href="{% url delete_url pk=row.pk %}">Deletar...</a></td>
+            <td class="text-center"><a href="{% url detail_url pk=row.pk %}"><i class="fa-solid fa-eye" title="Visualizar"></i></a>
+            <a href="{% url update_url pk=row.pk %}"><i class="fa-solid fa-pen-to-square mx-1" title="Editar"></i></a>
+            <a href="{% url delete_url pk=row.pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></td>
         </tr>
     {% endfor %}
 </table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous">
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btn_search").click(function() {
+            search = $("#input_search").val();
+            url = '{% url list_url %}' + '?' +
+                $.param({search:search});
+            window.location.href = url;
+        });
+    });
+</script>
 {% endblock %}

@@ -15,7 +15,7 @@ body {
     justify-content: center;
 }
 
-.form-pesquisar {
+.flex-row {
     display: flex;
     flex-direction: row;
 }

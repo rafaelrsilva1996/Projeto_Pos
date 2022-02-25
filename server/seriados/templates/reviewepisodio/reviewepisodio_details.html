@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<p><a href="{% url 'seriados:reviewepisodio_update' pk=object.pk %}">Atualizar Review do Episódio</a></p>
-<p><a href="{% url 'seriados:reviewepisodio_delete' pk=object.pk %}">Deletar Review do Episódio</a></p>
-
 <h1>Detalhes de Review do Episódio</h1>
+
+<div class="flex-row">
+    <p><a href="{% url 'seriados:reviewepisodio_update' pk=object.pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
+    <p><a href="{% url 'seriados:reviewepisodio_delete' pk=object.pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+</div>
 
 <p><b>Episódio</b>: {{ object.episodio }}</p>
 <p><b>Revisor</b>: {{ object.revisor }}</p>
