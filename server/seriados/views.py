@@ -223,9 +223,18 @@ class RevisorListView(ListView):
     model = Revisor
 
 
-class RevisorDetailView(DetailView):
+class RevisorDetailView(ListView):
     template_name = 'revisor/revisor_details.html'
-    model = Revisor
+    model = ReviewEpisodio
+
+    def get(self, request, pk):
+        objects = ReviewEpisodio.objects.filter(revisor_id=pk)
+        context = {
+            'title': "Temporada",
+            'objects': objects,
+            'pk': pk,
+        }
+        return render(request, 'revisor/revisor_details.html', context)
 
 
 class RevisorCreateView(CreateView):

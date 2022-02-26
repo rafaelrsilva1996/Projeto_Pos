@@ -5,10 +5,16 @@
 <h1>Detalhes do Revisor</h1>
 
 <div class="flex-row">
-    <p><a href="{% url 'seriados:revisor_update' pk=object.pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
-    <p><a href="{% url 'seriados:revisor_delete' pk=object.pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+    <p><a href="{% url 'seriados:revisor_update' pk=pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
+    <p><a href="{% url 'seriados:revisor_delete' pk=pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
 </div>
 
-<p><b>User</b>: {{ object.user }}</p>
-<p><b>Reviews</b>: {{ object.review }}</p>
+<p><b>Revisor</b>: {{ objects.first.revisor }}</p>
+{% for object in objects %}
+<div class="my-4">
+    <p><b>Episódio</b>: {{ object.episodio }}</p>
+    <p><b>Nota</b>: {{ object.nota }}</p>
+</div>    
+{% endfor %}
+
 {% endblock %}
