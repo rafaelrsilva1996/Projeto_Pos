@@ -1,6 +1,7 @@
 import imp
 import re
 from tkinter.tix import Form
+from urllib import request
 from django import template
 from django.forms import fields
 from django.forms.models import model_to_dict
@@ -14,7 +15,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Episodio, Revisor, Serie, Temporada, ReviewEpisodio
-from .forms import SerieForm, TemporadaForm, RevisorForm, ReviewEpisodioForm
+from .forms import SerieForm, TemporadaForm, RevisorForm, ReviewEpisodioForm, EpisodioForm
 
 def prepare_data_list(objects, fields_name):
     labels = list()
@@ -64,6 +65,7 @@ def series_details(request, pk):
         'data': prepare_data_detail(_object, ['nome']),
         'update_url': 'seriados:serie_update',
         'delete_url': 'seriados:serie_delete',
+        'list_url': 'seriados:series_list',
         'pk': pk,
     }
     return render(request, 'generic/details.html', context)
@@ -81,11 +83,15 @@ def serie_insert(request):
                 'seriados:series_details',
                 kwargs = {'pk': obj.pk}
             ))
-
-    return render(request, 'form/form_base.html', {
+    
+    context = {
         'form': form,
         'target_url': 'seriados:serie_insert',
-    })
+        'list_url': 'seriados:series_list',
+        'title': 'Série',
+    }
+
+    return render(request, 'form/form_base.html', context)
 
 
 class SerieUpdateView(UpdateView):
@@ -124,6 +130,7 @@ def episodio_details(request, pk):
         'data': prepare_data_detail(_object, ['titulo', 'data', 'temporada']),
         'update_url': 'seriados:episodio_update',
         'delete_url': 'seriados:episodio_delete',
+        'list_url': 'seriados:episodio_list',
         'pk': pk,
     }
     return render(request, 'generic/details.html', context)
@@ -141,8 +148,18 @@ def episodio_nota_list(request, nota):
 
 class EpisodioCreateView(CreateView):
     template_name = 'form/form_generic.html'
-    model = Episodio
-    fields = ['temporada', 'data', 'titulo']
+    form_class = EpisodioForm
+
+    def get(self, request):
+        form = EpisodioForm()
+        
+        context = {
+            'form': form,
+            'list_url': 'seriados:episodio_list',
+            'title': 'Episódio',
+        }
+
+        return render(request, 'form/form_generic.html', context)
 
 
 class EpisodioUpdateView(UpdateView):
@@ -194,6 +211,7 @@ class TemporadaDetailView(View):
             'data': prepare_data_detail(_object, ['numero', 'serie']),
             'update_url': 'seriados:temporada_update',
             'delete_url': 'seriados:temporada_delete',
+            'list_url': 'seriados:temporada_list',
             'pk': pk,
         }
         return render(request, 'generic/details.html', context)
@@ -202,6 +220,17 @@ class TemporadaDetailView(View):
 class TemporadaCreateView(CreateView):
     template_name = "form/form_generic.html"
     form_class = TemporadaForm
+
+    def get(self, request):
+        form = TemporadaForm()
+        
+        context = {
+            'form': form,
+            'list_url': 'seriados:temporada_list',
+            'title': 'Temporada',
+        }
+
+        return render(request, 'form/form_generic.html', context)
 
 
 class TemporadaUpdateView(UpdateView):
@@ -230,7 +259,8 @@ class RevisorDetailView(ListView):
     def get(self, request, pk):
         objects = ReviewEpisodio.objects.filter(revisor_id=pk)
         context = {
-            'title': "Temporada",
+            'title': "Revisor",
+            'list_url': 'seriados:revisor_list',
             'objects': objects,
             'pk': pk,
         }
@@ -240,6 +270,17 @@ class RevisorDetailView(ListView):
 class RevisorCreateView(CreateView):
     template_name = "form/form_generic.html"
     form_class = RevisorForm
+
+    def get(self, request):
+        form = RevisorForm()
+
+        context = {
+            'form': form,
+            'list_url': 'seriados:revisor_list',
+            'title': 'Revisor',
+        }
+
+        return render(request, 'form/form_generic.html', context)
 
 
 class RevisorUpdateView(UpdateView):
@@ -269,6 +310,17 @@ class ReviewEpisodioDetailView(DetailView):
 class ReviewEpisodioCreateView(CreateView):
     template_name = "form/form_generic.html"
     form_class = ReviewEpisodioForm
+
+    def get(self, request):
+        form = ReviewEpisodioForm()
+
+        context = {
+            'form': form,
+            'list_url': 'seriados:reviewepisodio_list',
+            'title': 'Review de Episódio',
+        }
+
+        return render(request, 'form/form_generic.html', context)
 
 
 class ReviewEpisodioUpdateView(UpdateView):

@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'seriados:home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Revisores</li>
+    </ol>
+</nav>
 
-<div class="flex-row mt-3">
-    <h1 class="mt-1">Lista de Revisores</h1>
-    <p><a href={% url 'seriados:revisor_insert' %}><h3><i class="fa-solid fa-plus mt-3 ml-2" title="Inserir"></i></h3></a></p>
+<div class="flex-row center">
+    <div class="mt-1"><h1>Lista de Revisores</h1></div>
+    <div class="ml-2">
+        <a href={% url 'seriados:revisor_insert' %}>
+            <h3>
+                <button type="button" class="btn btn-primary btn-sm mt-3">Inserir</button>
+            </h3>
+        </a>
+    </div>
 </div>
 
 <table class="table table-hover table-striped">

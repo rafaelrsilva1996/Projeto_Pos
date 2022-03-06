@@ -1,4 +1,5 @@
 from csv import field_size_limit
+from pyexpat import model
 from django import forms
 
 from .models import Revisor, Serie, Temporada, Episodio, ReviewEpisodio
@@ -23,3 +24,9 @@ class ReviewEpisodioForm(forms.ModelForm):
     class Meta:
         model = ReviewEpisodio
         fields = ['episodio', 'revisor', 'nota']
+
+
+class EpisodioForm(forms.ModelForm):
+    class Meta:
+        model = Episodio
+        fields = ['temporada', 'data', 'titulo']

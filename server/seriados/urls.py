@@ -16,7 +16,7 @@ urlpatterns = [
     path('episodios/', views.episodio_list, name='episodio_list'),
     path('episodios/<int:pk>/', views.episodio_details, name='episodio_details'),
     path('episodios/nota/<str:nota>/', views.episodio_nota_list, name='episodio_nota_list'),
-    path('episodios/inserir>/', views.EpisodioCreateView.as_view(), name='episodio_insert'),
+    path('episodios/inserir/', views.EpisodioCreateView.as_view(), name='episodio_insert'),
     path('episodios/<int:pk>/editar/', views.EpisodioUpdateView.as_view(), name='episodio_update'),
     path('episodios/<int:pk>/excluir/', views.EpisodioDeleteView.as_view(), name='episodio_delete'),
 

@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'seriados:home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'seriados:reviewepisodio_list' %}">Lista de Revisores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Review do Episódio</li>
+    </ol>
+</nav>
 
 <h1>Detalhes de Review do Episódio</h1>
 

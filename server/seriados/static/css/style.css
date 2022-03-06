@@ -19,3 +19,15 @@ body {
     display: flex;
     flex-direction: row;
 }
+
+.around {
+    justify-content: space-around;
+}
+
+.center {
+    justify-content: center;
+}
+
+.start {
+    justify-content: start;
+}
