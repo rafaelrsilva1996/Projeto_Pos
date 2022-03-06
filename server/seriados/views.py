@@ -98,6 +98,10 @@ class SerieUpdateView(UpdateView):
     template_name = 'form/form_generic.html'
     model = Serie
     fields = ['nome']
+    extra_context={
+        'list_url': 'seriados:series_list',
+        'title': 'Série',
+    }
 
 
 class SerieDeleteView(DeleteView):
@@ -166,6 +170,10 @@ class EpisodioUpdateView(UpdateView):
     template_name = 'form/form_generic.html'
     model = Episodio
     fields = ['temporada', 'data', 'titulo']
+    extra_context={
+        'list_url': 'seriados:episodio_list',
+        'title': 'Episódio',
+    }
 
 
 class EpisodioDeleteView(DeleteView):
@@ -237,6 +245,10 @@ class TemporadaUpdateView(UpdateView):
     template_name = 'form/form_generic.html'
     model = Temporada
     fields = ['serie', 'numero']
+    extra_context={
+        'list_url': 'seriados:temporada_list',
+        'title': 'Temporada',
+    }
 
 
 class TemporadaDeleteView(DeleteView):
@@ -287,6 +299,10 @@ class RevisorUpdateView(UpdateView):
     template_name = 'form/form_generic.html'
     model = Revisor
     fields = ['user']
+    extra_context={
+        'list_url': 'seriados:revisor_list',
+        'title': 'Revisor',
+    }
 
 
 class RevisorDeleteView(DeleteView):
@@ -327,6 +343,10 @@ class ReviewEpisodioUpdateView(UpdateView):
     template_name = 'form/form_generic.html'
     model = ReviewEpisodio
     fields = ['episodio', 'revisor', 'nota']
+    extra_context={
+        'list_url': 'seriados:reviewepisodio_list',
+        'title': 'Review de Episódio',
+    }
 
 
 class ReviewEpisodioDeleteView(DeleteView):
