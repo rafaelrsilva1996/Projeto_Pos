@@ -28,6 +28,6 @@ body {
     justify-content: center;
 }
 
-.start {
-    justify-content: start;
+.end {
+    justify-content: end;
 }

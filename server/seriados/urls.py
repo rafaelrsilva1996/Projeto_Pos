@@ -19,6 +19,7 @@ urlpatterns = [
     path('episodios/inserir/', views.EpisodioCreateView.as_view(), name='episodio_insert'),
     path('episodios/<int:pk>/editar/', views.EpisodioUpdateView.as_view(), name='episodio_update'),
     path('episodios/<int:pk>/excluir/', views.EpisodioDeleteView.as_view(), name='episodio_delete'),
+    path('episodios/busca/', views.EpisodioBuscaListView.as_view(), name='episodio_busca_list'),
 
     path('temporadas/', views.TemporadaListView.as_view(), name='temporada_list'),
     path('temporadas/<int:pk>/', views.TemporadaDetailView.as_view(), name='temporada_details'),

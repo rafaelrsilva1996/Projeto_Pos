@@ -9,6 +9,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import context
 from django.urls import reverse
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
@@ -70,6 +73,7 @@ def series_details(request, pk):
     }
     return render(request, 'generic/details.html', context)
 
+@login_required
 def serie_insert(request):
     if request.method == 'GET':
         form = SerieForm()
@@ -184,6 +188,34 @@ class EpisodioDeleteView(DeleteView):
         return reverse('seriados:episodio_list')
 
 
+class EpisodioBuscaListView(ListView):
+    template_name = 'episodio/episodio_busca_list.html'
+    model = Episodio
+    extra_context={
+        'detail_url': 'seriados:episodio_details',
+        'insert_url': 'seriados:episodio_insert',
+        'title': 'Episódios',
+    }
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', "")
+        q = Q(titulo__contains=search) | Q(temporada__serie__nome__contains=search)
+        
+        for term in search.split():
+            q = q | Q(titulo__contains=term)
+            q = q | Q(temporada__serie__nome__contains=term)
+            try:
+                i_term = int(term)
+            except ValueError:
+                pass
+            else:
+                q = q | Q(temporada__numero=i_term)
+
+        qs = super().get_queryset().filter(q)
+        
+        return qs
+
+
 class Contact(TemplateView):
     template_name = 'contact.html'
 
@@ -225,7 +257,7 @@ class TemporadaDetailView(View):
         return render(request, 'generic/details.html', context)
 
 
-class TemporadaCreateView(CreateView):
+class TemporadaCreateView(LoginRequiredMixin, CreateView):
     template_name = "form/form_generic.html"
     form_class = TemporadaForm
 
@@ -241,7 +273,7 @@ class TemporadaCreateView(CreateView):
         return render(request, 'form/form_generic.html', context)
 
 
-class TemporadaUpdateView(UpdateView):
+class TemporadaUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'form/form_generic.html'
     model = Temporada
     fields = ['serie', 'numero']
@@ -251,7 +283,7 @@ class TemporadaUpdateView(UpdateView):
     }
 
 
-class TemporadaDeleteView(DeleteView):
+class TemporadaDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "temporada/temporada_confirm_delete.html"
     model = Temporada
 
