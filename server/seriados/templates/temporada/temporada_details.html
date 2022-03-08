@@ -17,8 +17,8 @@
         <p><a href="{% url delete_url pk=pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
     </div>
     
-    {% for row in data %}
-    <p><b>{{ row.label }}</b>: {{ row.value }}</p>
-    {% endfor %}
+    <p><b>Série</b>: {{ object.serie }}</p>
+    <p><b>Temporada</b>: {{ object.numero }}</p>
 </div>
+
 {% endblock %}

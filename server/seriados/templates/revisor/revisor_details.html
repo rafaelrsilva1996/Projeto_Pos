@@ -9,14 +9,15 @@
     </ol>
 </nav>
 
-<h1>Detalhes do {{ title }}</h1>
-
-<div class="flex-row">
-    <p><a href="{% url 'seriados:revisor_update' pk=pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
-    <p><a href="{% url 'seriados:revisor_delete' pk=pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+<div class="text-center mt-3">
+    <h1>Detalhes do {{ title }}</h1>
+    
+    <div class="flex-row center">
+        <p><a href="{% url 'seriados:revisor_update' pk=pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
+        <p><a href="{% url 'seriados:revisor_delete' pk=pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+    </div>
+    <p><b>{{ title }}</b>: {{ objects.first.revisor }}</p>
 </div>
-
-<p><b>{{ title }}</b>: {{ objects.first.revisor }}</p>
 
 <table class="table table-hover table-striped">
     <tr>

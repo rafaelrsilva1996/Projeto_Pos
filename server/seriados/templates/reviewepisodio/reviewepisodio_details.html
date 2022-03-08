@@ -9,14 +9,17 @@
     </ol>
 </nav>
 
-<h1>Detalhes de Review do Episódio</h1>
+<div class="text-center mt-3">
+    <h1>Detalhes de Review do Episódio</h1>
+    
+    <div class="flex-row center">
+        <p><a href="{% url 'seriados:reviewepisodio_update' pk=object.pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
+        <p><a href="{% url 'seriados:reviewepisodio_delete' pk=object.pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+    </div>
 
-<div class="flex-row">
-    <p><a href="{% url 'seriados:reviewepisodio_update' pk=object.pk %}"><i class="fa-solid fa-pen-to-square mr-3" title="Editar"></i></a></p>
-    <p><a href="{% url 'seriados:reviewepisodio_delete' pk=object.pk %}"><i class="fa-solid fa-trash" title="Deletar"></i></a></p>
+    <p><b>Episódio</b>: {{ object.episodio }}</p>
+    <p><b>Revisor</b>: {{ object.revisor }}</p>
+    <p><b>Nota</b>: {{ object.nota }}</p>
 </div>
 
-<p><b>Episódio</b>: {{ object.episodio }}</p>
-<p><b>Revisor</b>: {{ object.revisor }}</p>
-<p><b>Nota</b>: {{ object.nota }}</p>
 {% endblock %}
