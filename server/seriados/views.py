@@ -1,13 +1,6 @@
-import imp
-import re
-from tkinter.tix import Form
-from urllib import request
-from django import template
-from django.forms import fields
 from django.forms.models import model_to_dict
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import context
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required, permission_required

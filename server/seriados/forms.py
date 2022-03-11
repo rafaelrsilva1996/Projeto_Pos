@@ -1,8 +1,6 @@
-from csv import field_size_limit
-from pyexpat import model
 from django import forms
 
-from .models import Revisor, Serie, Temporada, Episodio, ReviewEpisodio
+from .models import Revisor, Temporada, Episodio, ReviewEpisodio
 
 class SerieForm(forms.Form):
     nome = forms.CharField(label="Nome da Série", max_length=70)

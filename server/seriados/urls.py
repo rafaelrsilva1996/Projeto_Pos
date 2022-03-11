@@ -1,5 +1,4 @@
-from unicodedata import name
-from django.urls import path, re_path, include, register_converter
+from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views

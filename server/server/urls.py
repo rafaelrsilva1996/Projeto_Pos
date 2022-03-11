@@ -22,12 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('seriados/', include('seriados.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    # path('accounts/login/', [name='login']),
-    # path('accounts/logout/', [name='logout']),
-    # path('accounts/password_change/', [name='password change']),
-    # path('accounts/password_change/done/', [name='password change done']),
-    # path('accounts/password_reset/', [name='password reset']),
-    # path('accounts/password_reset/done/', [name='password reset done']),
-    # path('accounts/reset/<uidb64>/<token>/', [name='password reset confirm']),
-    # path('accounts/reset/done/', [name='password reset complete']),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
